@@ -7,7 +7,7 @@ import kotlinx.coroutines.delay
 
 class FakeApi : ApiInterface {
 
-    override suspend fun getNews(source: String): News {
+    override suspend fun getNewsOrEmptyList(source: String): News {
         delay(1000)
         return News(
             arrayListOf(
