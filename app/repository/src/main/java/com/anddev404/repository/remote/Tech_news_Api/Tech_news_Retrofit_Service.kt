@@ -14,7 +14,7 @@ interface Tech_news_Retrofit_Service {
     @GET(
         "{source}"
     )
-    suspend fun getNews(//tu suspend
+    suspend fun getNews(
         @Path("source") source: String
     ): Response<ArrayList<Response_Tech_news>>
 }
