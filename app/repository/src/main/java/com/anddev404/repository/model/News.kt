@@ -1,6 +1,6 @@
 package com.anddev404.repository.model
 
-class News(val news: List<SingularNews> = listOf()) {
+class News(val news: List<SingularNews> = arrayListOf<SingularNews>()) {
 
     fun getString(): String {
 
