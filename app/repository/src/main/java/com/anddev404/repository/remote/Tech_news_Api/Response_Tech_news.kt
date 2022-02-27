@@ -15,5 +15,7 @@ data class Response_Tech_news(
 
         const val xRapidapiHostValue = "tech-news3.p.rapidapi.com"
         const val xRapidapiHostName = "x-rapidapi-host"
+
+        const val baseUrl = "https://tech-news3.p.rapidapi.com/"
     }
 }
