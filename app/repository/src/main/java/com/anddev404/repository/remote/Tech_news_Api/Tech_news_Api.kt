@@ -1,6 +1,5 @@
 package com.anddev404.repository.remote.Tech_news_Api
 
-import android.util.Log
 import com.anddev404.repository.model.News
 import com.anddev404.repository.model.SingularNews
 import com.anddev404.repository.remote.ApiInterface
