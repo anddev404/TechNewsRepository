@@ -4,6 +4,6 @@ import com.anddev404.repository.model.News
 
 interface ApiInterface {
 
-    suspend fun getNews(): News
+    suspend fun getNews(source: String = "default"): News
 
 }
