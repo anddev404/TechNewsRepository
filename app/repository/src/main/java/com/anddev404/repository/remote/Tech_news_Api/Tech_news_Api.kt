@@ -14,14 +14,22 @@ class Tech_news_Api : ApiInterface {
 
     override suspend fun getNewsOrEmptyList(source: String): News {
 
-        var newsApi = api.getNews("gsmarena")///TODO temporary source is 'gsmarena'
+        try {
+            var newsResponse = api.getNews("gsmarena")///TODO temporary source is 'gsmarena'
+            if (newsResponse.isSuccessful) {
+                if (newsResponse.code() == 200) {
 
-        if (newsApi.code() == 200) {
+                    var newsList = newsResponse.body() ?: arrayListOf()
 
-            var newsList = newsApi.body() ?: arrayListOf()
+                    return convertTechNewsResponseToNewsModel(newsList)
+                }
+            } else {
+                //TODO error codes
+            }
 
-            return convertTechNewsResponseToNewsModel(newsList)
+        } catch (t: Throwable) {//TODO catch UnknownHostException
         }
+
         return News(arrayListOf())
     }
 
@@ -30,7 +38,7 @@ class Tech_news_Api : ApiInterface {
         var news = News()
 
         for (singularNews in responseTechNews) {
-            (news.news as ArrayList).add(
+            ((news.news) as ArrayList<SingularNews>).add(
                 SingularNews(
                     singularNews.title,
                     singularNews.link,
