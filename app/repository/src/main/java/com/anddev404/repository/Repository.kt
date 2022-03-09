@@ -1,11 +1,12 @@
 package com.anddev404.repository
 
-import com.anddev404.repository.model.News
-import com.anddev404.repository.remote.ApiSource
-import com.anddev404.repository.remote.fake_Api.FakeApi
 import com.anddev404.repository.remote.ApiInterface
+import com.anddev404.repository.remote.ApiSource
 import com.anddev404.repository.remote.Tech_news_Api.Tech_news_Api
-import com.anddev404.repository.remote.Tech_news_Api.Tech_news_Retrofit_Service
+import com.anddev404.repository.remote.fake_Api.FakeApi
+import com.anddev404.repository.remote.image_loaders.ImageLoaderInterface
+import com.anddev404.repository.remote.image_loaders.ImageLoaderSource
+import com.anddev404.repository.remote.image_loaders.picasso.PicassoLibrary
 
 class Repository {
 
@@ -17,5 +18,14 @@ class Repository {
 
         }
         return FakeApi()//todo change 'return' to exception or default api
+    }
+
+    fun getImageLoader(source: ImageLoaderSource): ImageLoaderInterface {
+
+        when (source) {
+            ImageLoaderSource.PICASSO_LIBRARY -> return PicassoLibrary()
+            //todo add glide
+        }
+        return PicassoLibrary()
     }
 }
