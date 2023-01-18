@@ -3,6 +3,7 @@ package com.anddev404.repository
 import com.anddev404.repository.remote.ApiInterface
 import com.anddev404.repository.remote.ApiSource
 import com.anddev404.repository.remote.Tech_news_Api.Tech_news_Api
+import com.anddev404.repository.remote.bing_news_search_Api.BingNewsApi
 import com.anddev404.repository.remote.fake_Api.FakeApi
 import com.anddev404.repository.remote.image_loaders.ImageLoaderInterface
 import com.anddev404.repository.remote.image_loaders.ImageLoaderSource
@@ -15,7 +16,7 @@ class Repository {
         when (source) {
             ApiSource.FAKE_API -> return FakeApi()
             ApiSource.TECH_NEWS -> return Tech_news_Api()
-
+            ApiSource.BING_NEWS_SEARCH -> return BingNewsApi()
         }
         return FakeApi()//todo change 'return' to exception or default api
     }
