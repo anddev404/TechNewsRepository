@@ -16,7 +16,7 @@ interface BingNewsRetrofitService {
         "${xBingApisSDKName}: ${xBingApisSDKValue}"
     )
     @GET("news/search")
-    suspend fun getNews(@Query("p") tag: String): Response<ResponseBingNews>
+    suspend fun getNews(@Query("p") tag: String): Response<BingNewsResponse>
 
     companion object {
 

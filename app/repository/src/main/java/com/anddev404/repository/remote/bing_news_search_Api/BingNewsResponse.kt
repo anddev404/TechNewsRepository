@@ -1,6 +1,6 @@
 package com.anddev404.repository.remote.bing_news_search_Api
 
-data class ResponseBingNews(val value: ArrayList<News> = arrayListOf()) {
+data class BingNewsResponse(val value: ArrayList<News> = arrayListOf()) {
 
     data class News(
         val name: String = "",
