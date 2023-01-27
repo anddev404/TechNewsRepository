@@ -15,8 +15,13 @@ interface BingNewsRetrofitService {
         "${xRapidApiHostName}: ${xRapidApiHostValue}",
         "${xBingApisSDKName}: ${xBingApisSDKValue}"
     )
-    @GET("news/search")
-    suspend fun getNews(@Query("p") tag: String): Response<BingNewsResponse>
+    @GET("news/search/")
+    suspend fun getNews(
+        @Query("q") tag: String,
+        @Query("mkt") mkt: String,
+        @Query("setLang") lang: String,
+        @Query("count") count: String
+    ): Response<BingNewsResponse>
 
     companion object {
 
