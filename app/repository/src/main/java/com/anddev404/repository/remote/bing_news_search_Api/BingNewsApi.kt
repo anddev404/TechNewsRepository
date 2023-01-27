@@ -11,7 +11,7 @@ class BingNewsApi : ApiInterface {
     override suspend fun getNewsOrEmptyList(source: String): News {
 
         try {
-            val newsResponse = api.getNews("android")
+            val newsResponse = api.getNews("android","en-US","en","100")
             if (newsResponse.isSuccessful) {
 
                 if (newsResponse.code() == 200) {
@@ -23,7 +23,7 @@ class BingNewsApi : ApiInterface {
         } catch (t: Throwable) {
         }
 
-        return News(arrayListOf())
+        return News()
     }
 
     private fun convertBingNewsResponseToNewsModel(response: BingNewsResponse): News {
