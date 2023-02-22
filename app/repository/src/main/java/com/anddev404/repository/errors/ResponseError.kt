@@ -8,7 +8,7 @@ enum class ResponseError(private val code: Int, private val message: String) : E
     BAD_RESPONSE_CODE(4, "Bad response"),
     EMPTY_RESPONSE_BODY(5, "Empty response"),
     JSON_CONVERSION_ERROR(6, "Could not convert response");
-    
+
     override fun code(): Int {
         return this.code
     }
