@@ -5,6 +5,7 @@ class SingularNews(
     var link: String = "",
     var imageUrl: String = "",
     var time: String = "",
-    var source: String = ""
+    var source: String = "",
+    var descriptions: String = ""
 ) {
 }
