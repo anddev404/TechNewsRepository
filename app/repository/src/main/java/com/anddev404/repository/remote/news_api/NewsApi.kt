@@ -12,7 +12,7 @@ class NewsApi : ApiInterface2 {
     private var api: NewsRetrofitService = NewsRetrofitService.newsApiService
 
     override suspend fun getResponse(
-        source: String,
+        category: String,
         page: Int,
         pageSize: Int,
         language: String
@@ -23,17 +23,25 @@ class NewsApi : ApiInterface2 {
             if (newsResponse.isSuccessful) {
 
                 newsResponse.body()?.let {
+                    try {
+                        val news = convertNewsResponseToNewsModel(it)
+                        if (news.news.isEmpty()) return Response(
+                            0, MutableLiveData(), MutableLiveData(ResponseError.EMPTY_RESPONSE_BODY)
+                        )
+                        return Response(
+                            200, MutableLiveData(ArrayList(news.news)), MutableLiveData()
+                        )
+                    } catch (t: Throwable) {
+                        return Response(
+                            0,
+                            MutableLiveData(),
+                            MutableLiveData(ResponseError.JSON_CONVERSION_ERROR)
+                        )
+                    }
 
-                    val news = convertNewsResponseToNewsModel(it)
-                    if (news.news.isEmpty()) return Response(
-                        0, MutableLiveData(), MutableLiveData(ResponseError.EMPTY_RESPONSE_BODY)
-                    )
-                    return Response(
-                        200, MutableLiveData(ArrayList(news.news)), MutableLiveData()
-                    )
                 }
                 return Response(
-                    0, MutableLiveData(), MutableLiveData(ResponseError.JSON_CONVERSION_ERROR)
+                    0, MutableLiveData(), MutableLiveData(ResponseError.EMPTY_RESPONSE_BODY)
                 )
             } else {
                 return Response(
@@ -72,14 +80,14 @@ class NewsApi : ApiInterface2 {
 
         val news = News()
 
-        response.articles.forEach { singularNews ->
+        response.articles?.forEach { singularNews ->
             ((news.news) as ArrayList<SingularNews>).add(
                 SingularNews(
-                    singularNews.title,
-                    singularNews.url,
-                    singularNews.urlToImage,
-                    singularNews.publishedAt,
-                    descriptions = singularNews.description
+                    singularNews.title ?: "",
+                    singularNews.url ?: "",
+                    singularNews.urlToImage ?: "",
+                    singularNews.publishedAt ?: "",
+                    descriptions = singularNews.description ?: ""
                 )
             )
         }
