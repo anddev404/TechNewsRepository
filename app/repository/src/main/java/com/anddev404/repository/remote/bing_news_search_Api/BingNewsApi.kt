@@ -11,7 +11,7 @@ class BingNewsApi : ApiInterface {
     override suspend fun getNewsOrEmptyList(source: String): News {
 
         try {
-            val newsResponse = api.getNews("android","en-US","en","100")
+            val newsResponse = api.getNews("android", "en-US", "en", "100")
             if (newsResponse.isSuccessful) {
 
                 if (newsResponse.code() == 200) {
@@ -30,13 +30,13 @@ class BingNewsApi : ApiInterface {
 
         val news = News()
 
-        response.value.forEach { singularNews ->
+        response.value?.forEach { singularNews ->
             ((news.news) as ArrayList<SingularNews>).add(
                 SingularNews(
-                    singularNews.name,
-                    singularNews.url,
-                    singularNews.image.thumbnail.contentUrl,
-                    singularNews.datePublished
+                    singularNews.name ?: "",
+                    singularNews.url ?: "",
+                    singularNews.image?.thumbnail?.contentUrl ?: "",
+                    singularNews.datePublished ?: ""
                 )
             )
         }
