@@ -49,7 +49,7 @@ class FakeApiV2 : ApiInterface2 {
             MutableLiveData(),
             MutableLiveData(error)
         )
-        return Response(200, MutableLiveData(response), MutableLiveData())
+        return Response(200, MutableLiveData(News(response)), MutableLiveData())
 
     }
 

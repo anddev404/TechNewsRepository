@@ -29,7 +29,7 @@ class NewsApi : ApiInterface2 {
                             0, MutableLiveData(), MutableLiveData(ResponseError.EMPTY_RESPONSE_BODY)
                         )
                         return Response(
-                            200, MutableLiveData(ArrayList(news.news)), MutableLiveData()
+                            200, MutableLiveData(news), MutableLiveData()
                         )
                     } catch (t: Throwable) {
                         return Response(
